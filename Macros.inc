@@ -1,8 +1,12 @@
-;MACROS UTILIZADOS FRECUENTEMENTE
+;LIBRERIA DE MACROS PARA PIC GAMA MEDIA ENHANCED 16F1XXX 
 
-	errorlevel    -302
+	errorlevel    -302  ;ELIMINA EL WARNING DE CAMBIO DE BANCOS
+	
+;****************DEFINICIONES************************** 
+	
 _HIGH	EQU 0x1
 _LOW	EQU 0x0
+	
 #define	_RA0 TRISA,PORTA,LATA,ANSELA,RA0
 #define	_RA1 TRISA,PORTA,LATA,ANSELA,RA1
 #define	_RA2 TRISA,PORTA,LATA,ANSELA,RA2
@@ -20,10 +24,16 @@ _LOW	EQU 0x0
 #define	_RB5 TRISB,PORTB,LATB,ANSELB,RB5	
 #define	_RB6 TRISB,PORTB,LATB,ANSELB,RB6
 #define	_RB7 TRISB,PORTB,LATB,ANSELB,RB7
+
+;********************************************************
 	
-	
-	
-_pin_mode_output    macro TRISX,PORTX,LATX,ANSELX,RXX
+
+;********CONFIGURACION DE PINES DEL MICRO****************
+
+;-------------PIN MODE OUTPUT---------------------
+;Configura cualquiera de los pines como salida
+;-------------------------------------------------	
+_pin_m_out    macro TRISX,PORTX,LATX,ANSELX,RXX
 		    banksel PORTX
 		    bcf	    PORTX,RXX
 		    banksel ANSELX
@@ -31,7 +41,11 @@ _pin_mode_output    macro TRISX,PORTX,LATX,ANSELX,RXX
 		    banksel TRISX
 		    bcf	    TRISX,RXX
 		    endm
-_pin_mode_input	    macro TRISX,PORTX,LATX,ANSELX,RXX
+
+;-------------PIN MODE INPUT---------------------
+;Configura cualquiera de los pines como entrada
+;------------------------------------------------		    
+_pin_m_in	    macro TRISX,PORTX,LATX,ANSELX,RXX
 		    banksel PORTX
 		    bcf	    PORTX,RXX
 		    banksel ANSELX
